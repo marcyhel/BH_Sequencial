@@ -1,6 +1,10 @@
 import 'package:bh_sequencial/mob/State/mob_state.dart';
 import 'package:bh_sequencial/screens/dados/dados.dart';
+import 'package:bh_sequencial/screens/dados/widget/tabela.dart';
+import 'package:bh_sequencial/screens/dados_user/dados_user.dart';
 import 'package:bh_sequencial/screens/load/load.dart';
+import 'package:bh_sequencial/screens/resultados/resultados.dart';
+import 'package:bh_sequencial/screens/tabela/tabela_result.dart';
 import 'package:bh_sequencial/screens/widgets/appBarCuston.dart';
 import 'package:bh_sequencial/screens/widgets/painel.dart';
 import 'package:flutter/material.dart';
@@ -68,25 +72,9 @@ class _PrincipalState extends State<Principal> {
                         child: Column(
                           children: [
                             Dados(),
-                            FlatButton(
-                                onPressed: () {
-                                  mob.gera();
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Load()),
-                                  );
-                                },
-                                child: Text("ddddd")),
-                            Column(
-                              children: [
-                                ...List.generate(
-                                    mob.list_graf.length,
-                                    (index) => Text(
-                                        mob.list_graf[index].nun.toString()))
-                              ],
-                            ),
+                            Dados_User(),
+                            Resultados_parcial(),
+                            Tabela_result(),
                             Text1(),
                             ...List.generate(300, (index) => Text("__${index}"))
                           ],

@@ -34,6 +34,7 @@ class _DadosState extends State<Dados> with TickerProviderStateMixin {
     return Container(
       padding: const EdgeInsets.all(50),
       decoration: const BoxDecoration(
+        boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)],
         image: DecorationImage(
           colorFilter: ColorFilter.mode(Colors.blue, BlendMode.color),
           image: AssetImage("assets/4.png"),
@@ -74,17 +75,11 @@ class _DadosState extends State<Dados> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Card_cuaton_Drop(
-                          label: 'label',
-                          func: () {},
-                          valor: 'valor',
-                          erro: false),
-                    ),
-                  ],
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  // padding: EdgeInsets.only(left: ),
+                  child: Card_cuaton_Drop(
+                      label: 'label', func: () {}, valor: 'valor', erro: false),
                 ),
                 Container(
                   margin: const EdgeInsets.all(20),

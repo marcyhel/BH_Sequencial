@@ -70,7 +70,7 @@ class Card_cuaton_Drop extends StatelessWidget {
       );
     });
     return Container(
-      width: MediaQuery.of(context).size.width / 3.13,
+      width: MediaQuery.of(context).size.width / 3.33,
       /*margin: ResponsiveWidget.isSmallScreen(context)
           ? const EdgeInsets.only(left: 0, bottom: 20)
           : const EdgeInsets.only(left: 40, bottom: 20),*/

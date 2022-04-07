@@ -26,6 +26,62 @@ abstract class _Mob_StateBase with Store {
   @observable
   String nda_inicial = '';
 
+  @observable
+  double latitude = 20.83;
+  @observable
+  double x9 = 0;
+  @observable
+  double i = 0;
+  @observable
+  double a = 0;
+  @observable
+  double n = 0;
+  @observable
+  double p = 0;
+  @observable
+  double en = 0;
+  @observable
+  double neg_acum = 0;
+  @observable
+  double cz5 = 0;
+  @observable
+  double total_t = 0;
+  @observable
+  double media_t = 0;
+  @observable
+  double total_p = 0;
+  @observable
+  double media_p = 0;
+  @observable
+  double total_etp = 0;
+  @observable
+  double media_etp = 0;
+  @observable
+  double total_p_etp = 0;
+  @observable
+  double media_p_etp = 0;
+  @observable
+  double total_alt = 0;
+  @observable
+  double media_alt = 0;
+  @observable
+  double total_etr = 0;
+  @observable
+  double media_etr = 0;
+  @observable
+  double total_def = 0;
+  @observable
+  double media_def = 0;
+  @observable
+  double total_exc = 0;
+  @observable
+  double media_exc = 0;
+
+  @observable
+  bool bool_cad = false;
+  @observable
+  bool bool_nda_inicial = false;
+
   @action
   void gera() {
     list_graf = ObservableList();
