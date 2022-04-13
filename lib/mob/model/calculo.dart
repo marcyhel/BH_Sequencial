@@ -11,9 +11,12 @@ void calcular() {
   } else {
     mob.x9 = mob.latitude;
   }
+
   for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
     //----------------------------------------------------------------------------------------------------------
     if (i == 0) {
+      mob.Lista_data_clima_media[i].nda = 1;
+    } else if (mob.Lista_data_clima_media[i].mes == 'jan') {
       mob.Lista_data_clima_media[i].nda = 1;
     } else {
       mob.Lista_data_clima_media[i].nda =
@@ -40,19 +43,14 @@ void calcular() {
   }
   //----------------------------------------------------------------------------------------------------------
   media_i = media_i / mob.Lista_data_clima_media.length;
-  mob.i = media_i * 12;
-  //----------------------------------------------------------------------------------------------------------
-  mob.a = 0.49 +
-      0.018 * mob.i -
-      7.7 * pow(10, -5) * pow(mob.i, 2) +
-      6.75 * pow(10, -7) * pow(mob.i, 3);
-  //----------------------------------------------------------------------------------------------------------
 
+  //----------------------------------------------------------------------------------------------------------
   for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
     //----------------------------------------------------------------------------------------------------------
     if (mob.Lista_data_clima_media[i].t < 26.5) {
       mob.Lista_data_clima_media[i].etp = 16 *
-          pow(10 * mob.Lista_data_clima_media[i].t / mob.i, mob.a) *
+          pow(10 * mob.Lista_data_clima_media[i].t / double.parse(mob.i),
+              double.parse(mob.a)) *
           (mob.Lista_data_clima_media[i].cont_dias / 30) *
           (mob.Lista_data_clima_media[i].n_horas / 12);
     } else {
@@ -66,407 +64,369 @@ void calcular() {
     mob.Lista_data_clima_media[i].p_etp =
         mob.Lista_data_clima_media[i].p - mob.Lista_data_clima_media[i].etp;
     //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].p_etp >= 0) {
-      mob.Lista_data_clima_media[i].mais = mob.Lista_data_clima_media[i].p_etp;
-    } else {
-      mob.Lista_data_clima_media[i].mais = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
+
     if (mob.Lista_data_clima_media[i].p_etp < 0) {
-      mob.Lista_data_clima_media[i].menos = mob.Lista_data_clima_media[i].p_etp;
+      mob.Lista_data_clima_media[i].contr1 = 1;
     } else {
-      mob.Lista_data_clima_media[i].menos = 0;
+      mob.Lista_data_clima_media[i].contr1 = 0;
     }
     //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].p_etp > 0) {
-      mob.Lista_data_clima_media[i].status1 =
-          mob.Lista_data_clima_media[i].p_etp;
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr2 = 0;
     } else {
-      mob.Lista_data_clima_media[i].status1 = 0;
+      if (mob.Lista_data_clima_media[i - 1].contr1 == 1 &&
+          mob.Lista_data_clima_media[i].contr1 == 0) {
+        mob.Lista_data_clima_media[i].contr2 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr2 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr3 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr2 == 1 &&
+          mob.Lista_data_clima_media[i].contr2 == 0) {
+        mob.Lista_data_clima_media[i].contr3 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr3 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr4 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr3 == 1 &&
+          mob.Lista_data_clima_media[i].contr3 == 0) {
+        mob.Lista_data_clima_media[i].contr4 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr4 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr5 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr4 == 1 &&
+          mob.Lista_data_clima_media[i].contr4 == 0) {
+        mob.Lista_data_clima_media[i].contr5 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr5 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr6 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr5 == 1 &&
+          mob.Lista_data_clima_media[i].contr5 == 0) {
+        mob.Lista_data_clima_media[i].contr6 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr6 = 0;
+      }
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr7 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr6 == 1 &&
+          mob.Lista_data_clima_media[i].contr6 == 0) {
+        mob.Lista_data_clima_media[i].contr7 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr7 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr8 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr7 == 1 &&
+          mob.Lista_data_clima_media[i].contr7 == 0) {
+        mob.Lista_data_clima_media[i].contr8 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr8 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr9 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr8 == 1 &&
+          mob.Lista_data_clima_media[i].contr8 == 0) {
+        mob.Lista_data_clima_media[i].contr9 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr9 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr10 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr9 == 1 &&
+          mob.Lista_data_clima_media[i].contr9 == 0) {
+        mob.Lista_data_clima_media[i].contr10 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr10 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr11 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr10 == 1 &&
+          mob.Lista_data_clima_media[i].contr10 == 0) {
+        mob.Lista_data_clima_media[i].contr11 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr11 = 0;
+      }
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].contr12 = 0;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].contr11 == 1 &&
+          mob.Lista_data_clima_media[i].contr11 == 0) {
+        mob.Lista_data_clima_media[i].contr12 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].contr12 = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      mob.Lista_data_clima_media[i].etp_com2 = 1;
+    } else {
+      if (mob.Lista_data_clima_media[i - 1].etp_com2 == 0) {
+        mob.Lista_data_clima_media[i].etp_com2 = 0;
+      } else {
+        mob.Lista_data_clima_media[i].etp_com2 = 1;
+      }
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      if (mob.Lista_data_clima_media[i].p_etp < 0) {
+        mob.Lista_data_clima_media[i].etp_ncom = 0;
+      } else {
+        mob.Lista_data_clima_media[i].etp_ncom =
+            mob.Lista_data_clima_media[i].p_etp;
+      }
+    } else {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].p_etp < 0) {
+          mob.Lista_data_clima_media[i].etp_ncom =
+              mob.Lista_data_clima_media[i].p_etp +
+                  mob.Lista_data_clima_media[i - 1].etp_ncom;
+        }
+      } else {
+        mob.Lista_data_clima_media[i].etp_ncom = -1;
+      }
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      if (mob.Lista_data_clima_media[i].p_etp < 0) {
+        mob.Lista_data_clima_media[i].etp_com = 0;
+      } else {
+        mob.Lista_data_clima_media[i].etp_com =
+            mob.Lista_data_clima_media[i].p_etp;
+      }
+    } else {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].p_etp < 0) {
+          mob.Lista_data_clima_media[i].etp_com =
+              mob.Lista_data_clima_media[i - 1].etp_com;
+        } else {
+          mob.Lista_data_clima_media[i].etp_com =
+              mob.Lista_data_clima_media[i].p_etp +
+                  mob.Lista_data_clima_media[i - 1].etp_com;
+        }
+      }
     }
   }
   //----------------------------------------------------------------------------------------------------------
+  double maior1 = 0;
+  double maior2 = 0;
   for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].p_etp > 0) {
-      mob.Lista_data_clima_media[i].status2 = mob
-              .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-              .status1 +
-          mob.Lista_data_clima_media.length;
-    } else {
-      mob.Lista_data_clima_media[i].status2 = 0;
+    if (mob.Lista_data_clima_media[i].etp_com > maior2) {
+      maior2 = mob.Lista_data_clima_media[i].etp_com;
     }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].p_etp > 0) {
-      mob.Lista_data_clima_media[i].status12 = mob
-              .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-              .status1 +
-          mob.Lista_data_clima_media[i].p_etp;
-    } else {
-      mob.Lista_data_clima_media[i].status12 = mob
-          .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-          .status1;
+    if (mob.Lista_data_clima_media[i].etp_ncom > maior1) {
+      maior1 = mob.Lista_data_clima_media[i].etp_ncom;
     }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].p_etp > 0) {
-      mob.Lista_data_clima_media[i].status22 = mob
-              .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-              .status2 +
-          mob.Lista_data_clima_media[i].p_etp;
-    } else {
-      mob.Lista_data_clima_media[i].status22 = mob
-          .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-          .status1;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].status1 >= double.parse(mob.cad)) {
-      mob.Lista_data_clima_media[i].control1 = 1;
-    } else {
-      mob.Lista_data_clima_media[i].control1 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-
   }
-  double maior_status2 = 0;
-  double soma_control1 = 0;
-  double soma_mais = 0;
-  double soma_menos = 0;
-
-  for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
-    if (mob.Lista_data_clima_media[i].status2 > maior_status2) {
-      maior_status2 = mob.Lista_data_clima_media[i].status2;
-    }
-    soma_control1 += mob.Lista_data_clima_media[i].control1;
-    soma_mais += mob.Lista_data_clima_media[i].mais;
-    soma_menos += mob.Lista_data_clima_media[i].menos;
-  }
-  mob.n = soma_menos / double.parse(mob.cad);
-  mob.p = (soma_mais / double.parse(mob.cad)) + 0.0000000001;
-  mob.en = 1 - exp(mob.n);
+  mob.maior_etp_com = maior2;
+  mob.maior_etp_ncom = maior1;
   //----------------------------------------------------------------------------------------------------------
-  if (mob.p >= mob.en) {
-    mob.neg_acum = 0;
+  if (double.parse(mob.cad) < 0) {
+    mob.cq10 = -double.parse(mob.cad);
   } else {
-    mob.neg_acum = -(-log(mob.p / mob.en)) * double.parse(mob.cad);
+    mob.cq10 = double.parse(mob.cad);
   }
   //----------------------------------------------------------------------------------------------------------
-  if (double.parse(mob.cad) > 0) {
-    if (soma_control1 == 0) {
-      mob.cz5 = 2;
-    } else {
-      mob.cz5 = 1;
-    }
+  if (mob.maior_etp_com < mob.cq10) {
+    mob.maior_etp_com2 = 1;
   } else {
-    mob.cz5 = 0;
+    mob.maior_etp_com2 = 0;
   }
   //----------------------------------------------------------------------------------------------------------
   for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
-    if (mob.Lista_data_clima_media[i].status2 >= double.parse(mob.cad) ||
-        mob.Lista_data_clima_media[i].status2 == maior_status2) {
-      mob.Lista_data_clima_media[i].control2 = 1;
+    if (i == 0) {
+      if (mob.maior_etp_com2 == 1 &&
+          (mob.Lista_data_clima_media[i].etp_ncom == mob.maior_etp_ncom ||
+              0 == 1)) {
+        mob.Lista_data_clima_media[i].co1 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].co1 = 0;
+      }
     } else {
-      mob.Lista_data_clima_media[i].control2 = 0;
+      if (mob.maior_etp_com2 == 1 &&
+          (mob.Lista_data_clima_media[i].etp_ncom == mob.maior_etp_ncom ||
+              mob.Lista_data_clima_media[i - 1].co1 == 1)) {
+        mob.Lista_data_clima_media[i].co1 = 1;
+      } else {
+        mob.Lista_data_clima_media[i].co1 = 0;
+      }
     }
     //----------------------------------------------------------------------------------------------------------
     if (i == 0) {
-      if (soma_control1 != 0) {
-        if (mob.Lista_data_clima_media[i].control1 == 1) {
-          mob.Lista_data_clima_media[i].inicio3 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].inicio3 = 0;
-        }
-      } else {
-        if (mob.Lista_data_clima_media[i].control2 == 1) {
-          mob.Lista_data_clima_media[i].inicio3 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].inicio3 = 0;
-        }
-      }
+      mob.Lista_data_clima_media[i].vlr1 = 0;
     } else {
-      if (soma_control1 != 0) {
-        if (mob.Lista_data_clima_media[i].control1 == 1 ||
-            mob.Lista_data_clima_media[i - 1].inicio3 == 1) {
-          mob.Lista_data_clima_media[i].inicio3 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].inicio3 = 0;
-        }
+      if (mob.Lista_data_clima_media[i].co1 == 1 &&
+          mob.Lista_data_clima_media[i - 1].co1) {
+        mob.Lista_data_clima_media[i].vlr1 =
+            mob.Lista_data_clima_media[i].p_etp;
       } else {
-        if (mob.Lista_data_clima_media[i].control2 == 1 ||
-            mob.Lista_data_clima_media[i - 1].inicio3 == 1) {
-          mob.Lista_data_clima_media[i].inicio3 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].inicio3 = 0;
-        }
+        mob.Lista_data_clima_media[i].vlr1 = 0;
       }
     }
+    //----------------------------------------------------------------------------------------------------------
+    mob.soma_vlr1 += mob.Lista_data_clima_media[i].vlr1;
+    //----------------------------------------------------------------------------------------------------------
+
+    if ((mob.Lista_data_clima_media[i].contr1 == 1 ||
+        mob.Lista_data_clima_media[i].contr2 == 1 ||
+        mob.Lista_data_clima_media[i].contr3 == 1 ||
+        mob.Lista_data_clima_media[i].contr4 == 1 ||
+        mob.Lista_data_clima_media[i].contr5 == 1 ||
+        mob.Lista_data_clima_media[i].contr6 == 1 ||
+        mob.Lista_data_clima_media[i].contr7 == 1 ||
+        mob.Lista_data_clima_media[i].contr8 == 1 ||
+        mob.Lista_data_clima_media[i].contr9 == 1 ||
+        mob.Lista_data_clima_media[i].contr10 == 1 ||
+        mob.Lista_data_clima_media[i].contr11 == 1 ||
+        mob.Lista_data_clima_media[i].contr12 == 1)) {
+      mob.Lista_data_clima_media[i].vlr2 = 1;
+    } else {
+      mob.Lista_data_clima_media[i].vlr2 = 0;
+    }
+  }
+  //----------------------------------------------------------------------------------------------------------
+  mob.co = 0;
+  //----------------------------------------------------------------------------------------------------------
+  if (mob.co < 0) {
+    mob.cq = 1;
+  } else {
+    mob.cq = 0;
+  }
+  //----------------------------------------------------------------------------------------------------------
+  for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
+    if (i == 0) {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].p_etp > 0) {
+          if (mob.Lista_data_clima_media[i].p_etp > double.parse(mob.cad)) {
+            mob.Lista_data_clima_media[i].arm = double.parse(mob.cad);
+          } else {
+            mob.Lista_data_clima_media[i].arm =
+                mob.Lista_data_clima_media[i].p_etp;
+          }
+        } else {
+          if (mob.Lista_data_clima_media[i].arm_logico >
+              double.parse(mob.cad)) {
+            mob.Lista_data_clima_media[i].arm = double.parse(mob.cad);
+          } else {
+            mob.Lista_data_clima_media[i].arm =
+                mob.Lista_data_clima_media[i].arm_logico;
+          }
+        }
+      } else {
+        mob.Lista_data_clima_media[i].arm = 0;
+      }
+    } else {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].arm_logico > double.parse(mob.cad)) {
+          mob.Lista_data_clima_media[i].arm = double.parse(mob.cad);
+        } else {
+          mob.Lista_data_clima_media[i].arm =
+              mob.Lista_data_clima_media[i].arm_logico;
+        }
+      } else {
+        mob.Lista_data_clima_media[i].arm = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
+    if (i == 0) {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].vlr2 == 0) {
+          mob.Lista_data_clima_media[i].neg_ac = 0;
+        } else {
+          if (mob.Lista_data_clima_media[i].p_etp < 0) {
+            mob.Lista_data_clima_media[i].neg_ac =
+                mob.Lista_data_clima_media[i].p_etp;
+          } else {
+            if (mob.Lista_data_clima_media[i].p_atp >= 0) {
+              mob.Lista_data_clima_media[i].neg_ac = double.parse(mob.cad) *
+                  log(mob.Lista_data_clima_media[i].arm /
+                      double.parse(mob.cad));
+            } else {
+              mob.Lista_data_clima_media[i].neg_ac = 0;
+            }
+          }
+        }
+      } else {
+        mob.Lista_data_clima_media[i].neg_ac = 0;
+      }
+    } else {
+      if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].vlr2 == 0) {
+          mob.Lista_data_clima_media[i].neg_ac = 0;
+        } else {
+          if (mob.Lista_data_clima_media[i].p_etp < 0) {
+            mob.Lista_data_clima_media[i].neg_ac =
+                mob.Lista_data_clima_media[i].p_etp +
+                    mob.Lista_data_clima_media[i - 1].neg_ac;
+          } else {
+            if (mob.Lista_data_clima_media[i].p_atp >= 0) {
+              mob.Lista_data_clima_media[i].neg_ac = double.parse(mob.cad) *
+                  log(mob.Lista_data_clima_media[i].arm /
+                      double.parse(mob.cad));
+            } else {
+              mob.Lista_data_clima_media[i].neg_ac = 0;
+            }
+          }
+        }
+      } else {
+        mob.Lista_data_clima_media[i].neg_ac = 0;
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------
 
     //----------------------------------------------------------------------------------------------------------
     if (i == 0) {
-      if (mob.Lista_data_clima_media[i].status1 >= double.parse(mob.cad)) {
-        mob.Lista_data_clima_media[i].inicio2 = 1;
-      } else {
-        mob.Lista_data_clima_media[i].inicio2 = 0;
-      }
+      mob.Lista_data_clima_media[i].arm_logico = 0;
     } else {
-      if (mob.Lista_data_clima_media[i].status1 >= double.parse(mob.cad) ||
-          mob.Lista_data_clima_media[i - 1].inicio2 == 1) {
-        mob.Lista_data_clima_media[i].inicio2 = 1;
-      } else {
-        mob.Lista_data_clima_media[i].inicio2 = 0;
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-        mob.Lista_data_clima_media[i].inicio = 1;
-      } else {
-        mob.Lista_data_clima_media[i].inicio = 0;
-      }
-    } else {
-      if (i == 0) {
-        if (mob.Lista_data_clima_media[i].inicio3 == 1 &&
-            mob.Lista_data_clima_media[i - 1].inicio3 == 0) {
-          mob.Lista_data_clima_media[i].inicio = 1;
-        } else {
-          mob.Lista_data_clima_media[i].inicio = 0;
-        }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-      if (mob.Lista_data_clima_media[i].arm_logico > double.parse(mob.cad)) {
-        mob.Lista_data_clima_media[i].arm2 = double.parse(mob.cad);
-      } else {
-        mob.Lista_data_clima_media[i].arm2 =
-            mob.Lista_data_clima_media[i].arm_logico;
-      }
-    } else {
-      mob.Lista_data_clima_media[i].arm2 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (mob.Lista_data_clima_media[i].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].neg_ac2 = 0;
-      } else {
-        if (soma_control1 == 0 && mob.Lista_data_clima_media[i].control2 != 0) {
-          mob.Lista_data_clima_media[i].neg_ac2 = mob.neg_acum;
-        } else {
-          if (mob.Lista_data_clima_media[i].p_etp < 0) {
-            mob.Lista_data_clima_media[i].neg_ac2 =
-                0 + mob.Lista_data_clima_media[i].p_etp;
+      if (mob.Lista_data_clima_media[i].estp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].vlr2 == 0) {
+          if (mob.maior_etp_com2 == 1) {
+            mob.Lista_data_clima_media[i].arm_logico = mob.soma_vlr1;
           } else {
-            if (mob.Lista_data_clima_media[i].p_etp > 0) {
-              mob.Lista_data_clima_media[i].neg_ac2 = double.parse(mob.cad) *
-                  log(mob.Lista_data_clima_media[i].arm2 /
-                      double.parse(mob.cad));
-            }
+            mob.Lista_data_clima_media[i].arm_logico = double.parse(mob.cad);
           }
-        }
-      }
-    } else {
-      if (mob.Lista_data_clima_media[i].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].neg_ac2 = 0;
-      } else {
-        if (soma_control1 == 0 && mob.Lista_data_clima_media[i].control2 != 0) {
-          mob.Lista_data_clima_media[i].neg_ac2 = mob.neg_acum;
         } else {
           if (mob.Lista_data_clima_media[i].p_etp < 0) {
-            mob.Lista_data_clima_media[i].neg_ac2 =
-                mob.Lista_data_clima_media[i - 1].neg_ac +
-                    mob.Lista_data_clima_media[i].p_etp;
-          } else {
-            if (mob.Lista_data_clima_media[i].p_etp > 0) {
-              mob.Lista_data_clima_media[i].neg_ac2 = double.parse(mob.cad) *
-                  log(mob.Lista_data_clima_media[i].arm2 /
-                      double.parse(mob.cad));
-            }
-          }
-        }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (mob.cz5 == 2 && mob.Lista_data_clima_media[i].inicio3 == 1) {
-        mob.Lista_data_clima_media[i].alt2 =
-            mob.Lista_data_clima_media[i].status2;
-      } else {
-        if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-          mob.Lista_data_clima_media[i].alt2 =
-              mob.Lista_data_clima_media[i].arm2 - double.parse(mob.cad);
-        } else {
-          mob.Lista_data_clima_media[i].alt2 = 0;
-        }
-      }
-    } else {
-      if (mob.cz5 == 2 &&
-          mob.Lista_data_clima_media[i].inicio3 == 1 &&
-          mob.Lista_data_clima_media[i - 1].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].alt2 =
-            mob.Lista_data_clima_media[i].status2;
-      } else {
-        if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-          mob.Lista_data_clima_media[i].alt2 =
-              mob.Lista_data_clima_media[i].arm2 -
-                  mob.Lista_data_clima_media[i - 1].arm2;
-        } else {
-          mob.Lista_data_clima_media[i].alt2 = 0;
-        }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-      if (mob.Lista_data_clima_media[i].p_etp >= 0) {
-        mob.Lista_data_clima_media[i].etr2 = mob.Lista_data_clima_media[i].etp;
-      } else {
-        if (mob.Lista_data_clima_media[i].alt2 < 0) {
-          mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].p +
-              (mob.Lista_data_clima_media[i].alt.abs());
-        } else {
-          mob.Lista_data_clima_media[i].etr2 =
-              mob.Lista_data_clima_media[i].etp;
-        }
-      }
-    } else {
-      mob.Lista_data_clima_media[i].etr2 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-      mob.Lista_data_clima_media[i].def2 = mob.Lista_data_clima_media[i].etp -
-          mob.Lista_data_clima_media[i].etr2;
-    } else {
-      mob.Lista_data_clima_media[i].def2 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].inicio3 == 1) {
-      if (mob.Lista_data_clima_media[i].arm2 < double.parse(mob.cad)) {
-        mob.Lista_data_clima_media[i].exc2 = 0;
-      } else {
-        if (mob.Lista_data_clima_media[i].arm2 == double.parse(mob.cad)) {
-          mob.Lista_data_clima_media[i].exc2 =
-              mob.Lista_data_clima_media[i].p_etp;
-        } else {
-          mob.Lista_data_clima_media[i].exc2 =
-              mob.Lista_data_clima_media[i].p_etp -
-                  mob.Lista_data_clima_media[i].alt2;
-        }
-      }
-    } else {
-      mob.Lista_data_clima_media[i].exc2 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].status1 >= double.parse(mob.cad) ||
-        soma_control1 == 1) {
-      mob.Lista_data_clima_media[i].control12 = 1;
-    } else {
-      mob.Lista_data_clima_media[i].control12 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].status1 == maior_status2) {
-      mob.Lista_data_clima_media[i].control22 = 1;
-    } else {
-      mob.Lista_data_clima_media[i].control22 = 0;
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (soma_control1 != 0) {
-        if (mob.Lista_data_clima_media[i].control12 == 1 ||
-            mob.Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-                    .inicio3 ==
-                1) {
-          mob.Lista_data_clima_media[i].control32 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].control32 = 0;
-        }
-      } else {
-        if (mob.Lista_data_clima_media[i].control22 == 1 ||
-            mob.Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-                    .inicio3 ==
-                1) {
-          mob.Lista_data_clima_media[i].control32 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].control32 = 0;
-        }
-      }
-    } else {
-      if (soma_control1 != 0) {
-        if (mob.Lista_data_clima_media[i].control12 == 1 ||
-            mob.Lista_data_clima_media[i - 1].control32 == 1) {
-          mob.Lista_data_clima_media[i].control32 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].control32 = 0;
-        }
-      } else {
-        if (mob.Lista_data_clima_media[i].control22 == 1 ||
-            mob.Lista_data_clima_media[i - 1].control32 == 1) {
-          mob.Lista_data_clima_media[i].control32 = 1;
-        } else {
-          mob.Lista_data_clima_media[i].control32 = 0;
-        }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].inicio == 0) {
-      mob.Lista_data_clima_media[i].arm_logico2 = 0;
-    } else {
-      if (soma_control1 != 0) {
-        if (mob.Lista_data_clima_media[i].status1 > double.parse(mob.cad)) {
-          mob.Lista_data_clima_media[i].arm_logico2 = double.parse(mob.cad);
-        } else {
-          mob.Lista_data_clima_media[i].arm_logico2 =
-              mob.Lista_data_clima_media[i].statuts1;
-        }
-      } else {
-        if (mob.Lista_data_clima_media[i].status2 > double.parse(mob.cad)) {
-          mob.Lista_data_clima_media[i].arm_logico2 = double.parse(mob.cad);
-        } else {
-          mob.Lista_data_clima_media[i].arm_logico2 = double.parse(mob.cad) *
-              exp(mob.Lista_data_clima_media[i].neg_ac2 /
-                  double.parse(mob.cad));
-        }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (mob.Lista_data_clima_media[i].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].arm_logico = 0;
-      } else {
-        if (mob.Lista_data_clima_media[i].arm_logico2 != 0) {
-          mob.Lista_data_clima_media[i].arm_logico =
-              mob.Lista_data_clima_media[i].arm_logico2;
-        } else {
-          if (mob.Lista_data_clima_media[i].p_etp < 0) {
-            mob.Lista_data_clima_media[i].arm_logico = double.parse(mob.cad) *
-                exp(mob.Lista_data_clima_media[i].neg_ac2 /
-                    double.parse(mob.cad));
-          } else {
-            if (mob.Lista_data_clima_media[i].p_etp > 0) {
-              mob.Lista_data_clima_media[i].arm_logico = double.parse(mob.cad) +
-                  mob.Lista_data_clima_media[i].p_etp.abs();
-            }
-          }
-        }
-      }
-    } else {
-      if (mob.Lista_data_clima_media[i].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].arm_logico = 0;
-      } else {
-        if (mob.Lista_data_clima_media[i].arm_logico2 != 0) {
-          mob.Lista_data_clima_media[i].arm_logico =
-              mob.Lista_data_clima_media[i].arm_logico2;
-        } else {
-          if (mob.Lista_data_clima_media[i].p_etp < 0) {
-            mob.Lista_data_clima_media[i].arm_logico = double.parse(mob.cad) *
-                exp(mob.Lista_data_clima_media[i].neg_ac2 /
-                    double.parse(mob.cad));
+            mob.Lista_data_clima_media[i].arm_logico = exp(
+                mob.Lista_data_clima_media[i].neg_ac / double.parse(mob.cad));
           } else {
             if (mob.Lista_data_clima_media[i].p_etp > 0) {
               mob.Lista_data_clima_media[i].arm_logico =
@@ -475,75 +435,19 @@ void calcular() {
             }
           }
         }
-      }
-    }
-    //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].control32 == 1) {
-      if (mob.Lista_data_clima_media[i].status32 > double.parse(mob.cad)) {
-        mob.Lista_data_clima_media[i].arm = double.parse(mob.cad);
       } else {
-        mob.Lista_data_clima_media[i].arm =
-            mob.Lista_data_clima_media[i].status32;
-      }
-    } else {
-      mob.Lista_data_clima_media[i].arm = 0;
-    }
-
-    //----------------------------------------------------------------------------------------------------------
-  }
-  //----------------------------------------------------------------------------------------------------------
-  for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
-    //----------------------------------------------------------------------------------------------------------
-    if (i == 0) {
-      if (mob.Lista_data_clima_media[i].control32 == 0) {
-        mob.Lista_data_clima_media[i].neg_ac = 0;
-      } else if (mob.Lista_data_clima_media[i].p_etp < 0) {
-        print(
-            "neg = ${mob.Lista_data_clima_media[mob.Lista_data_clima_media.length - 1].neg_ac2}");
-        print("p_atp = ${mob.Lista_data_clima_media[i].p_etp}");
-        print(
-            "soma = ${mob.Lista_data_clima_media[i].neg_ac = mob.Lista_data_clima_media[mob.Lista_data_clima_media.length - 1].neg_ac2 + mob.Lista_data_clima_media[i].p_etp}");
-        mob.Lista_data_clima_media[i].neg_ac = mob
-                .Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-                .neg_ac2 +
-            mob.Lista_data_clima_media[i].p_etp;
-      } else if (mob.Lista_data_clima_media[i].p_etp >= 0) {
-        mob.Lista_data_clima_media[i].neg_ac = double.parse(mob.cad) *
-            log(mob.Lista_data_clima_media[i].arm / double.parse(mob.cad));
-      }
-    } else {
-      if (mob.Lista_data_clima_media[i].control32 == 0) {
-        mob.Lista_data_clima_media[i].neg_ac = 0;
-      } else if (mob.Lista_data_clima_media[i].p_etp < 0) {
-        mob.Lista_data_clima_media[i].neg_ac =
-            mob.Lista_data_clima_media[i - 1].neg_ac +
-                mob.Lista_data_clima_media[i].p_etp;
-      } else if (mob.Lista_data_clima_media[i].p_etp >= 0) {
-        mob.Lista_data_clima_media[i].neg_ac = double.parse(mob.cad) *
-            log(mob.Lista_data_clima_media[i].arm / double.parse(mob.cad));
+        mob.Lista_data_clima_media[i].arm_logico = 0;
       }
     }
     //----------------------------------------------------------------------------------------------------------
     if (i == 0) {
-      if (mob.cz5 == 2 &&
-          mob.Lista_data_clima_media[i].control32 == 1 &&
-          mob.Lista_data_clima_media[i].inicio3 == 0) {
-        mob.Lista_data_clima_media[i].alt =
-            mob.Lista_data_clima_media[i].status2;
-      } else if (mob.Lista_data_clima_media[i].control32 == 1) {
-        mob.Lista_data_clima_media[i].alt = mob.Lista_data_clima_media[i].arm -
-            mob.Lista_data_clima_media[mob.Lista_data_clima_media.length - 1]
-                .arm2;
+      if (mob.Lista_data_clima_media[i].estp_com2 == 1) {
+        mob.Lista_data_clima_media[i].alt = mob.Lista_data_clima_media[i].arm;
       } else {
         mob.Lista_data_clima_media[i].alt = 0;
       }
     } else {
-      if (mob.cz5 == 2 &&
-          mob.Lista_data_clima_media[i].control32 == 1 &&
-          mob.Lista_data_clima_media[i].control32 == 0) {
-        mob.Lista_data_clima_media[i].alt =
-            mob.Lista_data_clima_media[i].status2;
-      } else if (mob.Lista_data_clima_media[i].control32 == 1) {
+      if (mob.Lista_data_clima_media[i].estp_com2 == 1) {
         mob.Lista_data_clima_media[i].alt = mob.Lista_data_clima_media[i].arm -
             mob.Lista_data_clima_media[i - 1].arm;
       } else {
@@ -551,58 +455,57 @@ void calcular() {
       }
     }
     //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].control32 == 1) {
-      if (mob.Lista_data_clima_media[i].p_etp >= 0) {
-        mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].etp;
-      } else if (mob.Lista_data_clima_media[i].alt < 0) {
-        mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].p +
-            mob.Lista_data_clima_media[i].alt.abs();
+    if (i == 0) {
+      if (mob.Lista_data_clima_media[i].estp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].p_etp >= 0 &&
+            mob.Lista_data_clima_media[i].alt >= 0) {
+          mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].etp;
+        } else {
+          mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].p +
+              mob.Lista_data_clima_media[i].alt.abs();
+        }
       } else {
-        mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].etp;
+        mob.Lista_data_clima_media[i].etr = 0;
       }
     } else {
-      mob.Lista_data_clima_media[i].etr = 0;
+      if (mob.Lista_data_clima_media[i].estp_com2 == 1) {
+        if (mob.Lista_data_clima_media[i].p_etp >= 0) {
+          mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].etp;
+        } else {
+          mob.Lista_data_clima_media[i].etr = mob.Lista_data_clima_media[i].p +
+              mob.Lista_data_clima_media[i].alt.abs();
+        }
+      } else {
+        mob.Lista_data_clima_media[i].etr = 0;
+      }
     }
     //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].control32 == 1) {
+    if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
       mob.Lista_data_clima_media[i].def =
           mob.Lista_data_clima_media[i].etp - mob.Lista_data_clima_media[i].etr;
     } else {
-      mob.Lista_data_clima_media[i].def == 0;
+      mob.Lista_data_clima_media[i].def = 0;
     }
     //----------------------------------------------------------------------------------------------------------
-    if (mob.Lista_data_clima_media[i].control32 == 1) {
+    if (mob.Lista_data_clima_media[i].etp_com2 == 1) {
       if (mob.Lista_data_clima_media[i].arm < double.parse(mob.cad)) {
         mob.Lista_data_clima_media[i].exc = 0;
-      } else if (mob.Lista_data_clima_media[i].arm == double.parse(mob.cad)) {
-        mob.Lista_data_clima_media[i].exc =
-            mob.Lista_data_clima_media[i].p_etp -
-                mob.Lista_data_clima_media[i].alt;
+      } else {
+        if (mob.Lista_data_clima_media[i].arm == double.parse(mob.cad)) {
+          mob.Lista_data_clima_media[i].exc =
+              mob.Lista_data_clima_media[i].p_etp -
+                  mob.Lista_data_clima_media[i].alt;
+        } else {
+          mob.Lista_data_clima_media[i].exc = 0;
+        }
       }
     } else {
       mob.Lista_data_clima_media[i].exc = 0;
     }
     //----------------------------------------------------------------------------------------------------------
 
+    //----------------------------------------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------------------
   }
-  for (var i = 0; i < mob.Lista_data_clima_media.length; i++) {
-    mob.total_p += mob.Lista_data_clima_media[i].p;
-    mob.total_t += mob.Lista_data_clima_media[i].t;
-    mob.total_etp += mob.Lista_data_clima_media[i].etp;
-    mob.total_p_etp += mob.Lista_data_clima_media[i].p_etp;
-    mob.total_alt += mob.Lista_data_clima_media[i].alt;
-    mob.total_etr += mob.Lista_data_clima_media[i].etr;
-    mob.total_def += mob.Lista_data_clima_media[i].def;
-    mob.total_exc += mob.Lista_data_clima_media[i].exc;
-  }
-  mob.media_p = mob.total_p / mob.Lista_data_clima_media.length;
-  mob.media_t = mob.total_t / mob.Lista_data_clima_media.length;
-  mob.media_etp = mob.total_etp / mob.Lista_data_clima_media.length;
-  mob.media_p_etp = mob.total_p_etp / mob.Lista_data_clima_media.length;
-  mob.media_alt = mob.total_alt / mob.Lista_data_clima_media.length;
-  mob.media_etr = mob.total_etr / mob.Lista_data_clima_media.length;
-  mob.media_def = mob.total_def / mob.Lista_data_clima_media.length;
-  mob.media_exc = mob.total_exc / mob.Lista_data_clima_media.length;
-  print(mob.total_p);
-  print(mob.media_p);
 }

@@ -2,6 +2,7 @@ import 'package:bh_sequencial/mob/State/mob_state.dart';
 import 'package:bh_sequencial/screens/dados/dados.dart';
 import 'package:bh_sequencial/screens/dados/widget/tabela.dart';
 import 'package:bh_sequencial/screens/dados_user/dados_user.dart';
+import 'package:bh_sequencial/screens/grafcos/grafico.dart';
 import 'package:bh_sequencial/screens/load/load.dart';
 import 'package:bh_sequencial/screens/resultados/resultados.dart';
 import 'package:bh_sequencial/screens/tabela/tabela_result.dart';
@@ -25,9 +26,13 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
   final Mob_State mob = GetIt.I<Mob_State>();
   double _opacity = 0;
-  final ScrollController _controller = new ScrollController();
+
   var top = 0.0;
   @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //print(top);
@@ -35,55 +40,50 @@ class _PrincipalState extends State<Principal> {
     return Scaffold(
       body: Stack(
         children: [
-          SmoothScrollWeb(
-            controller: _controller,
-            child: NotificationListener(
-                onNotification: (v) {
-                  if (v is ScrollUpdateNotification) {
-                    if (v.metrics.axis != Axis.horizontal) {
-                      top += v.scrollDelta! / 2;
+          NotificationListener(
+              onNotification: (v) {
+                if (v is ScrollUpdateNotification) {
+                  if (v.metrics.axis != Axis.horizontal) {
+                    top += v.scrollDelta! / 2;
 
-                      mob.to += v.scrollDelta! / 1.9;
-                      //temp();
-                    }
+                    mob.to += v.scrollDelta! / 1.9;
+                    //temp();
                   }
+                }
 
-                  return true;
-                },
-                child: SingleChildScrollView(
-                  controller: _controller,
-                  physics: NeverScrollableScrollPhysics(),
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                      ),
-                      Observer(builder: (_) {
-                        //print("d");
-                        return Positioned(top: mob.to, child: Painel(top: top));
-                      }),
-                      //Painel(top: top),
+                return true;
+              },
+              child: SingleChildScrollView(
+                //physics: NeverScrollableScrollPhysics(),
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                    ),
+                    Observer(builder: (_) {
+                      //print("d");
+                      return Positioned(top: mob.to, child: Painel(top: top));
+                    }),
+                    //Painel(top: top),
 
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height),
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Dados(),
-                            Dados_User(),
-                            Resultados_parcial(),
-                            Tabela_result(),
-                            Text1(),
-                            ...List.generate(300, (index) => Text("__${index}"))
-                          ],
-                        ),
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Dados(),
+                          Dados_User(),
+                          Resultados_parcial(),
+                          Tabela_result(),
+                          Graficos(),
+                        ],
                       ),
-                    ],
-                  ),
-                )),
-          ),
+                    ),
+                  ],
+                ),
+              )),
           Observer(builder: (_) {
             return GestureDetector(
                 onTap: () {

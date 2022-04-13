@@ -1,12 +1,15 @@
+import 'package:bh_sequencial/mob/State/mob_state.dart';
+import 'package:bh_sequencial/mob/model/salvar.dart';
 import 'package:bh_sequencial/screens/dados/widget/button_clima.dart';
 import 'package:bh_sequencial/screens/dados_user/widget/button_calc.dart';
 import 'package:bh_sequencial/screens/dados_user/widget/card_custon_input.dart';
 import 'package:bh_sequencial/screens/load/load.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class Dados_User extends StatelessWidget {
-  const Dados_User({Key? key}) : super(key: key);
-
+  Dados_User({Key? key}) : super(key: key);
+  final Mob_State mob = GetIt.I<Mob_State>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,9 +24,11 @@ class Dados_User extends StatelessWidget {
               children: [
                 Card_cuaton_input(
                   erro: false,
-                  func: () {},
+                  func: (e) {
+                    mob.setCad(e);
+                  },
                   label: "Cad",
-                  valor: "",
+                  valor: mob.cad,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -31,17 +36,21 @@ class Dados_User extends StatelessWidget {
                     Expanded(
                       child: Card_cuaton_input(
                         erro: false,
-                        func: () {},
+                        func: (e) {
+                          mob.setI(e);
+                        },
                         label: "I",
-                        valor: "",
+                        valor: mob.i,
                       ),
                     ),
                     Expanded(
                       child: Card_cuaton_input(
                         erro: false,
-                        func: () {},
+                        func: (e) {
+                          mob.setA(e);
+                        },
                         label: "A",
-                        valor: "",
+                        valor: mob.a,
                       ),
                     ),
                   ],
@@ -51,6 +60,8 @@ class Dados_User extends StatelessWidget {
                     child: Button_Calc(
                         func: () {
                           Navigator.pop(context);
+                          mob.calcula();
+                          salvar_dados();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:bh_sequencial/mob/model/calculo.dart';
 import 'package:bh_sequencial/mob/model/model_dados_tabela.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobx/mobx.dart';
@@ -9,6 +12,18 @@ part 'mob_state.g.dart';
 class Mob_State = _Mob_StateBase with _$Mob_State;
 
 abstract class _Mob_StateBase with Store {
+  Box box;
+  _Mob_StateBase(this.box) {}
+  @action
+  bool calcula() {
+    try {
+      calcular();
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
   @observable
   double to = 0;
   @observable
@@ -24,16 +39,75 @@ abstract class _Mob_StateBase with Store {
   @observable
   String cad = '';
   @observable
+  String i = '';
+  @observable
+  String a = '';
+  @observable
   String nda_inicial = '';
+
+  @observable
+  double maior_etp_ncom = 0;
+  @observable
+  double maior_etp_com = 0;
+  @observable
+  double maior_etp_com2 = 0;
+  @observable
+  double cq10 = 0;
+  @observable
+  double soma_vlr1 = 0;
 
   @observable
   double latitude = 20.83;
   @observable
-  double x9 = 0;
+  double x9 = -22;
+
   @observable
-  double i = 0;
+  double ci = 0;
   @observable
-  double a = 0;
+  double cj = 1;
+  @observable
+  double ck = 0;
+  @observable
+  double co = 0;
+  @observable
+  double cq = 0;
+  @observable
+  double cr = 0;
+  @observable
+  double cs = 0;
+  @observable
+  double ct = 0;
+  @observable
+  double cu = 0;
+  @observable
+  double cv = 0;
+  @observable
+  double cw = 0;
+  @observable
+  double cx = 0;
+  @observable
+  double cy = 0;
+  @observable
+  double cz = 0;
+  @observable
+  double de = 0;
+  @observable
+  double df = 0;
+  @observable
+  double dg1 = 0;
+  @observable
+  double dg2 = 0;
+  @observable
+  double dh = 0;
+  @observable
+  double di = 0;
+  @observable
+  double dj = 0;
+  @observable
+  double dk = 0;
+  @observable
+  double dl = 0;
+
   @observable
   double n = 0;
   @observable
@@ -82,6 +156,12 @@ abstract class _Mob_StateBase with Store {
   @observable
   bool bool_nda_inicial = false;
 
+  @action
+  void setCad(valor) => cad = valor;
+  @action
+  void setI(valor) => i = valor;
+  @action
+  void setA(valor) => a = valor;
   @action
   void gera() {
     list_graf = ObservableList();
@@ -151,7 +231,7 @@ abstract class _Mob_StateBase with Store {
       var contmes = 0;
       var chavemes = 0;
 
-      for (var i = res.length - 1; i > 345; i--) {
+      for (var i = 0; i < res.length; i++) {
         if (mesatual != DateTime.parse(res[i]['data']).month) {
           contmes = 1;
         }
@@ -201,6 +281,7 @@ abstract class _Mob_StateBase with Store {
             DateTime.parse(Lista_data_clima[i - 1].data).year.toString()));
         cont_dias = 0;
         mes = DateTime.parse(Lista_data_clima[i].data).month;
+
         mediap = 0;
         mediat = 0;
         mediatmin = 0;
@@ -229,7 +310,18 @@ abstract class _Mob_StateBase with Store {
           0,
           0,
           def_mes(i),
-          DateTime.now().year.toString(),
+          (DateTime.now().year - 2).toString(),
+        ),
+      );
+    }
+    for (var i = 1; i <= 12; i++) {
+      Lista_data_clima_media.add(
+        DataClimaMedia(
+          30,
+          0,
+          0,
+          def_mes(i),
+          (DateTime.now().year - 1).toString(),
         ),
       );
     }

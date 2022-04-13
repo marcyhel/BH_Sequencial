@@ -8,7 +8,7 @@ class Tabela_result extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 400,
+      height: 500,
       child: LargTabela(),
     );
   }

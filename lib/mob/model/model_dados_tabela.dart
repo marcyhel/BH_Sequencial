@@ -18,6 +18,29 @@ class DataClimaMedia {
   double d = 0;
   double hn = 0;
 
+  double contr1 = 0;
+  double contr2 = 0;
+  double contr3 = 0;
+  double contr4 = 0;
+  double contr5 = 0;
+  double contr6 = 0;
+  double contr7 = 0;
+  double contr8 = 0;
+  double contr9 = 0;
+  double contr10 = 0;
+  double contr11 = 0;
+  double contr12 = 0;
+
+  double co1 = 0;
+  double vlr1 = 0;
+  double vlr2 = 0;
+  double vlr3 = 0;
+
+  double etp_ncom = 0;
+  double etp_com = 0;
+  double etp_com2 = 0;
+  double arm_logico = 0;
+
   double mais = 0;
   double menos = 0;
   double status1 = 0;
@@ -30,7 +53,6 @@ class DataClimaMedia {
   double def2 = 0;
   double exc2 = 0;
 
-  double arm_logico = 0;
   double arm_logico2 = 0;
   double control1 = 0;
   double control2 = 0;

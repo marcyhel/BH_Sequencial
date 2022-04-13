@@ -2,13 +2,17 @@ import 'package:bh_sequencial/screens/principal.dart';
 import 'package:bh_sequencial/mob/State/mob_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-void main() {
-  singletonsApp();
+import 'package:hive_flutter/hive_flutter.dart';
+
+void main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('caixacultura');
+  singletonsApp(box);
   runApp(const MyApp());
 }
 
-void singletonsApp() {
-  GetIt.I.registerSingleton(Mob_State());
+void singletonsApp(box) {
+  GetIt.I.registerSingleton(Mob_State(box));
 }
 
 class MyApp extends StatelessWidget {
