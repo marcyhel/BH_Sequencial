@@ -1,18 +1,18 @@
 import 'package:cutout_text_effect/cutout_text_effect.dart';
 import 'package:flutter/material.dart';
 
-class Painel extends StatefulWidget {
+class PainelSmall extends StatefulWidget {
   double top;
-  Painel({
+  PainelSmall({
     Key? key,
     required this.top,
   }) : super(key: key);
 
   @override
-  State<Painel> createState() => _PainelState();
+  State<PainelSmall> createState() => _PainelState();
 }
 
-class _PainelState extends State<Painel> {
+class _PainelState extends State<PainelSmall> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -20,8 +20,8 @@ class _PainelState extends State<Painel> {
         ColorFiltered(
           colorFilter: ColorFilter.mode(Colors.blue, BlendMode.color),
           child: Container(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height / 10),
+            //padding:
+            //    EdgeInsets.only(top: MediaQuery.of(context).size.height / 10),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
@@ -32,43 +32,29 @@ class _PainelState extends State<Painel> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
+              
               children: [
                 Container(
                   //height: 100,
+                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.only(top:MediaQuery.of(context).size.height/6),
                   width: MediaQuery.of(context).size.width,
                   // margin: EdgeInsets.only(left: 40),
 
-                  child: Center(
-                    child:
-                    Text("Balanço Hídrico\nSequencial", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 60
-                      ,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(2, 2),
-                          blurRadius: 2,
-                          color: Colors.black38,
-                        ),
-                      ],
-                    ),),
-                    /* CustomPaint(
-                      painter: CutOutText(
-                        text: 'Balanço Hídrico\nSequencial',
-                        textDirection: TextDirection.ltr,
-                        boxRadius: 0,
-                        boxBackgroundColor: Colors.black87,
-                        textStyle: const TextStyle(
-                          letterSpacing: 10,
-                          fontFamily: 'mark',
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  child: Text("Balanço Hídrico\nSequencial", style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50
+                    ,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(2, 2),
+                        blurRadius: 2,
+                        color: Colors.black38,
                       ),
-                    ),*/
-                  ),
+                    ],
+                  ),),
                 ),
                 SizedBox(height: 70),
                
@@ -78,10 +64,11 @@ class _PainelState extends State<Painel> {
         ),
        
         Positioned(
-            left: MediaQuery.of(context).size.width / 1.4,
-
+          bottom: 2,
+            left:50, 
+          //right: 2,
             //bottom: 50,
-            top: 100,
+            //top: 100,
             child: InsidePainel(
               cor: Color(0xff394273),
             )),
@@ -116,7 +103,7 @@ class InsidePainel extends StatelessWidget {
                     "O que é ?",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       shadows: [
                         Shadow(
@@ -136,7 +123,7 @@ class InsidePainel extends StatelessWidget {
                     "O Balanço hídrico sequencial (BHS) permite acompanhar a disponibilidade de água no solo ao longo de um periodo. O cálculo é feito para uma cobertura vegetal ",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 17,
                       shadows: [
                         Shadow(
                           offset: Offset(2, 2),

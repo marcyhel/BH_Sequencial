@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+
+
 class AppBarCuston extends StatelessWidget {
   double opaci;
   AppBarCuston({
@@ -36,14 +38,15 @@ class AppBarCuston extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 90,
+            //margin: EdgeInsets.all(5),
+            width: 50,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/log.png"), fit: BoxFit.fitWidth),
             ),
           ),
           Row(
-            children: [
+            children: [/*
               GestureDetector(
                 onTap: () {
                   print("object");
@@ -105,7 +108,7 @@ class AppBarCuston extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
             ],
           )
         ],

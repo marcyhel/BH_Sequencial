@@ -2,12 +2,15 @@ import 'package:bh_sequencial/mob/State/mob_state.dart';
 import 'package:bh_sequencial/screens/dados/dados.dart';
 import 'package:bh_sequencial/screens/dados/widget/tabela.dart';
 import 'package:bh_sequencial/screens/dados_user/dados_user.dart';
+import 'package:bh_sequencial/screens/footer/footer.dart';
 import 'package:bh_sequencial/screens/grafcos/grafico.dart';
 import 'package:bh_sequencial/screens/load/load.dart';
 import 'package:bh_sequencial/screens/resultados/resultados.dart';
 import 'package:bh_sequencial/screens/tabela/tabela_result.dart';
 import 'package:bh_sequencial/screens/widgets/appBarCuston.dart';
 import 'package:bh_sequencial/screens/widgets/painel.dart';
+import 'package:bh_sequencial/screens/widgets/painelsmall.dart';
+import 'package:bh_sequencial/screens/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -62,7 +65,7 @@ class _PrincipalState extends State<Principal> {
                     ),
                     Observer(builder: (_) {
                       //print("d");
-                      return Positioned(top: mob.to, child: Painel(top: top));
+                      return Positioned(top: mob.to, child:  ResponsiveWidget.isSmallScreen(context) ?PainelSmall(top: top):Painel(top: top));
                     }),
                     //Painel(top: top),
 
@@ -78,6 +81,7 @@ class _PrincipalState extends State<Principal> {
                           Resultados_parcial(),
                           Tabela_result(),
                           Graficos(),
+                          Foolter()
                         ],
                       ),
                     ),

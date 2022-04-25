@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:bh_sequencial/mob/State/mob_state.dart';
-class Tab1 extends StatelessWidget {
-  Tab1({Key? key}) : super(key: key);
+class Tab1_small extends StatelessWidget {
+  Tab1_small({Key? key}) : super(key: key);
   final Mob_State mob = GetIt.I<Mob_State>();
   List<String> mes = [
     'Mês',
@@ -16,7 +16,7 @@ class Tab1 extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white,),
       padding: EdgeInsets.symmetric(vertical: 10),
       
-      width: MediaQuery.of(context).size.width / 5,
+      width: MediaQuery.of(context).size.width / 1,
       child: Column(
         children: List.generate((mob.Lista_data_clima_media.length/2).toInt(), (index) {
           index = index - 1;
